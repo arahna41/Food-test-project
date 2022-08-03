@@ -35,7 +35,7 @@ window.addEventListener("DOMContentLoaded", () => {
   });
 
   //Timer
-  const deadline = "2022-07-30";
+  const deadline = "2022-09-30";
 
   function getTimeRemaining(endtime) {
     let days, hours, minutes, seconds;
@@ -197,9 +197,22 @@ window.addEventListener("DOMContentLoaded", () => {
     return await res.json();
   };
 
-  getReosurce("http://localhost:3000/menu").then((data) => {
-    console.log(data);
+  /* getReosurce("http://localhost:3000/menu").then((data) => {
     data.forEach(({ img, altimg, title, descr, price }) => {
+      new MenuCard(
+        img,
+        altimg,
+        title,
+        descr,
+        price,
+        ".menu .container"
+      ).render();
+    });
+  }); */
+
+  /* Axios */
+  axios.get("http://localhost:3000/menu").then((data) => {
+    data.data.forEach(({ img, altimg, title, descr, price }) => {
       new MenuCard(
         img,
         altimg,
