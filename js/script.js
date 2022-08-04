@@ -331,10 +331,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 4000);
   }
 
-  fetch("http://localhost:3000/menu")
-    .then((data) => data.json())
-    .then((res) => console.log(res));
-
   //Slider 1
 
   /* const slides = document.querySelectorAll(".offer__slide"),
@@ -377,6 +373,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   //Slider 2
   const slides = document.querySelectorAll(".offer__slide"),
+    slider = document.querySelector(".offer__slider"),
     prev = document.querySelector(".offer__slider-prev"),
     next = document.querySelector(".offer__slider-next"),
     total = document.querySelector("#total"),
@@ -401,8 +398,31 @@ window.addEventListener("DOMContentLoaded", () => {
     slide.style.width = width;
   });
 
+  slider.style.position = "relative";
+
+  const dots = document.createElement("ol"),
+    dotsArr = [];
+  dots.classList.add("carousel__dots");
+  slider.append(dots);
+
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement("li");
+    dot.setAttribute("data-slide-to", i + 1);
+    dot.classList.add("dot");
+    if (i == 0) {
+      dot.classList.add("dot_active");
+    }
+    dots.append(dot);
+    dotsArr.push(dot);
+  }
+
   function showCurrentNum(n) {
     current.textContent = getZero(n);
+  }
+
+  function showActiveDot(arr) {
+    arr.forEach((dot) => dot.classList.remove("dot_active"));
+    arr[slideIndex - 1].classList.add("dot_active");
   }
 
   prev.addEventListener("click", () => {
@@ -421,6 +441,8 @@ window.addEventListener("DOMContentLoaded", () => {
     showCurrentNum(slideIndex);
 
     slidesField.style.transform = `translateX(-${offset}px)`;
+
+    showActiveDot(dotsArr);
   });
 
   next.addEventListener("click", () => {
@@ -439,5 +461,22 @@ window.addEventListener("DOMContentLoaded", () => {
     showCurrentNum(slideIndex);
 
     slidesField.style.transform = `translateX(-${offset}px)`;
+
+    showActiveDot(dotsArr);
+  });
+
+  dotsArr.forEach((dot) => {
+    dot.addEventListener("click", (e) => {
+      const slideTo = e.target.getAttribute("data-slide-to");
+
+      slideIndex = slideTo;
+      offset = +width.slice(0, width.length - 2) * (slideTo - 1);
+
+      slidesField.style.transform = `translateX(-${offset}px)`;
+
+      showCurrentNum(slideIndex);
+
+      showActiveDot(dotsArr);
+    });
   });
 });
