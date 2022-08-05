@@ -22,24 +22,6 @@
       "price": 21
     }
   ],
-  "offer": [
-    {
-      "img": "img/slider/pepper.jpg",
-      "altimg": "pepper"
-    },
-    {
-      "img": "img/slider/food-12.jpg",
-      "altimg": "food"
-    },
-    {
-      "img": "img/slider/olive-oil.jpg",
-      "altimg": "oil"
-    },
-    {
-      "img": "img/slider/paprika.jpg",
-      "altimg": "paprika"
-    }
-  ],
   "requests": [
     {
       "name": "f",
@@ -50,6 +32,26 @@
       "name": "1",
       "phone": "1",
       "id": 2
+    },
+    {
+      "name": "ава",
+      "phone": "ааа",
+      "id": 3
+    },
+    {
+      "name": "имм",
+      "phone": "мм",
+      "id": 4
+    },
+    {
+      "name": "тт",
+      "phone": "ии",
+      "id": 5
+    },
+    {
+      "name": "Author",
+      "phone": "+380111111111",
+      "id": 6
     }
   ]
 }
