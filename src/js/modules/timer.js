@@ -1,6 +1,13 @@
-function timer() {
+function getZero(num) {
+  if (num >= 0 && num < 10) {
+    return `0${num}`;
+  } else {
+    return num;
+  }
+}
+
+function timer(id, deadline) {
   //Timer
-  const deadline = "2022-09-30";
 
   function getTimeRemaining(endtime) {
     let days, hours, minutes, seconds;
@@ -27,14 +34,6 @@ function timer() {
     };
   }
 
-  function getZero(num) {
-    if (num >= 0 && num < 10) {
-      return `0${num}`;
-    } else {
-      return num;
-    }
-  }
-
   function setClock(selector, endtime) {
     const timer = document.querySelector(selector),
       days = timer.querySelector("#days"),
@@ -59,7 +58,37 @@ function timer() {
     }
   }
 
-  setClock(".timer", deadline);
+  setClock(id, deadline);
+
+  function showEndData(deadline) {
+    const timeSpan = document.querySelector(".end_data"),
+      time = new Date(deadline),
+      monthID = time.getMonth(),
+      month = [
+        "Января",
+        "Февраля",
+        "Марта",
+        "Апреля",
+        "Мая",
+        "Июня",
+        "Июля",
+        "Августа",
+        "Сентября",
+        "Октября",
+        "Ноября",
+        "Декабря",
+      ];
+
+    new Date().toLocaleString("ru", {
+      month: "long",
+    });
+
+    timeSpan.innerHTML = `${getZero(time.getDate())} ${
+      month[monthID]
+    } в ${getZero(time.getUTCHours())}:${getZero(time.getMinutes())}`;
+  }
+  showEndData(deadline);
 }
 
-module.exports = timer;
+export default timer;
+export { getZero };

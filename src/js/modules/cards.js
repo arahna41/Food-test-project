@@ -1,3 +1,5 @@
+import { getReosurce } from "../services/services";
+
 function cards() {
   /* Class */
   class MenuCard {
@@ -41,32 +43,8 @@ function cards() {
     }
   }
 
-  const getReosurce = async function (url) {
-    const res = await fetch(url);
-
-    if (!res.ok) {
-      throw new Error(`Could not fetch ${url}, status: ${res.status} `);
-    }
-
-    return await res.json();
-  };
-
-  /* getReosurce("http://localhost:3000/menu").then((data) => {
-  data.forEach(({ img, altimg, title, descr, price }) => {
-    new MenuCard(
-      img,
-      altimg,
-      title,
-      descr,
-      price,
-      ".menu .container"
-    ).render();
-  });
-}); */
-
-  /* Axios */
-  axios.get("http://localhost:3000/menu").then((data) => {
-    data.data.forEach(({ img, altimg, title, descr, price }) => {
+  getReosurce("http://localhost:3000/menu").then((data) => {
+    data.forEach(({ img, altimg, title, descr, price }) => {
       new MenuCard(
         img,
         altimg,
@@ -77,6 +55,20 @@ function cards() {
       ).render();
     });
   });
+
+  /* Axios */
+  /*  axios.get("http://localhost:3000/menu").then((data) => {
+    data.data.forEach(({ img, altimg, title, descr, price }) => {
+      new MenuCard(
+        img,
+        altimg,
+        title,
+        descr,
+        price,
+        ".menu .container"
+      ).render();
+    });
+  }); */
 
   /* Another variant */
 
@@ -105,4 +97,4 @@ function cards() {
   } */
 }
 
-module.exports = cards;
+export default cards;
